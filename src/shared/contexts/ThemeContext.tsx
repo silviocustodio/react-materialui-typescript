@@ -20,7 +20,12 @@ export const useAppThemeContext = () => {
   return useContext(ThemeContext);
 };
 
-export const AppThemeProvider: React.FC = ({ children }) => {
+interface IAppThemeProviderProps {
+  children: React.ReactNode;
+}
+export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({
+  children,
+}) => {
   const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
 
   const toggleTheme = useCallback(() => {
@@ -39,7 +44,7 @@ export const AppThemeProvider: React.FC = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ themeName, toggleTheme }}>
-      <ThemeProvider theme={DarkTheme}>
+      <ThemeProvider theme={theme}>
         <Box
           width="100vw"
           height="100vh"
